@@ -42,16 +42,23 @@ function ProductoForm() {
     fetchData();
   }, [id, isEditing]);
 
+
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
+      // Asegúrate de que el valor enviado coincida con lo que espera tu API
+      const dataToSend = {
+        ...values,
+        precio: values.precio.toString() // Asegura que precio sea string si tu API lo espera así
+      };
+      
       if (isEditing) {
-        await updateProducto(id, values);
+        await updateProducto(id, dataToSend);
       } else {
-        await createProducto(values);
+        await createProducto(dataToSend);
       }
       navigate('/productos');
     } catch (error) {
-      console.error('Error saving producto:', error);
+      console.error('Error saving producto:', error, error.response?.data);
     } finally {
       setSubmitting(false);
     }
