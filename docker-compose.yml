@@ -2,15 +2,23 @@ version: '3'
 
 services:
   backend:
-    build: ./backend    # Construye usando el Dockerfile en ./backend
+    build: ./backend
     restart: always
     ports:
       - "8000:8000"
-    # Otras configuraciones...
+    volumes:
+      - ./backend:/app
+    environment:
+      - DEBUG=0
+      - DJANGO_ALLOWED_HOSTS=161.97.95.105,localhost,127.0.0.1
 
-  # frontend:
-  #   build: ./frontend   # Construye usando el Dockerfile en ./frontend
-  #   restart: always
-  #   ports:
-  #     - "3000:3000"
-    # Otras configuraciones...
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  static_volume:
