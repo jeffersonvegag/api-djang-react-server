@@ -1,10 +1,10 @@
 // src/App.jsx
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import ProductosScreen from './screens/ProductosScreen';
-import CategoriasScreen from './screens/CategoriasScreen';
-import ProductoFormScreen from './screens/ProductoFormScreen';
-import CategoriaFormScreen from './screens/CategoriaFormScreen';
+import Navbar from '../components/Navbar';
+import ProductosScreen from './ProductosScreen';
+import CategoriasScreen from './CategoriasScreen';
+import ProductoFormScreen from './ProductoFormScreen';
+import CategoriaFormScreen from './CategoriaFormScreen';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
