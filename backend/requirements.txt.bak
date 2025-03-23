@@ -1,0 +1,8 @@
+Django>=4.0,<5.0
+djangorestframework>=3.12,<4.0
+psycopg2-binary>=2.9,<3.0
+gunicorn>=20.1,<21.0
+whitenoise>=5.3,<6.0
+django-cors-headers>=3.10,<4.0
+numpy>=1.21,<2.0
+Cannot install whitenoise<6.0 and >=5.3 and whitenoise==6.5.0

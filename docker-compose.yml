@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend    # Construye usando el Dockerfile en ./backend
+    restart: always
+    ports:
+      - "8000:8000"
+    # Otras configuraciones...
+
+  # frontend:
+  #   build: ./frontend   # Construye usando el Dockerfile en ./frontend
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+    # Otras configuraciones...
