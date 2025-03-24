@@ -1,4 +1,3 @@
-// src/components/productos/ProductosList.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductos, deleteProducto } from '../../services/api';
@@ -12,6 +11,7 @@ function ProductosList() {
       setLoading(true);
       const response = await getProductos();
       setProductos(response.data);
+      console.log('Productos cargados:', response.data); // Depuración
     } catch (error) {
       console.error('Error fetching productos:', error);
     } finally {
@@ -27,7 +27,7 @@ function ProductosList() {
     if (window.confirm('¿Estás seguro de eliminar este producto?')) {
       try {
         await deleteProducto(id);
-        fetchProductos();
+        fetchProductos(); // Recargar la lista de productos
       } catch (error) {
         console.error('Error deleting producto:', error);
       }
@@ -51,7 +51,7 @@ function ProductosList() {
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Categoría</th>
-                <th>Acciones</th>
+                <th>Accionesss</th>
               </tr>
             </thead>
             <tbody>
@@ -61,13 +61,13 @@ function ProductosList() {
                     <td>{producto.id}</td>
                     <td>{producto.nombre}</td>
                     <td>${producto.precio}</td>
-                    <td>{producto.categoria}</td>
+                    <td>{producto.categoria.nombre}</td> {/* Asegúrate de que categoria sea un objeto */}
                     <td>
                       <Link to={`/productos/editar/${producto.id}`} className="btn btn-sm btn-warning me-2">
                         Editar
                       </Link>
-                      <button 
-                        className="btn btn-sm btn-danger" 
+                      <button
+                        className="btn btn-sm btn-danger"
                         onClick={() => handleDelete(producto.id)}
                       >
                         Eliminar

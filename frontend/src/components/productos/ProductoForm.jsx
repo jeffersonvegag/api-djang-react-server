@@ -1,4 +1,3 @@
-// src/components/productos/ProductoForm.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -42,21 +41,23 @@ function ProductoForm() {
     fetchData();
   }, [id, isEditing]);
 
-
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      // Asegúrate de que el valor enviado coincida con lo que espera tu API
       const dataToSend = {
         ...values,
-        precio: values.precio.toString() // Asegura que precio sea string si tu API lo espera así
+        precio: values.precio.toString()
       };
-      
+
+      console.log('Data to send:', dataToSend); // Depuración
+
       if (isEditing) {
         await updateProducto(id, dataToSend);
+        console.log('Producto actualizado'); // Depuración
       } else {
         await createProducto(dataToSend);
+        console.log('Producto creado'); // Depuración
       }
-      navigate('/productos');
+      navigate('/productos'); // Navegar a la lista de productos para recargar los datos
     } catch (error) {
       console.error('Error saving producto:', error, error.response?.data);
     } finally {
@@ -86,33 +87,33 @@ function ProductoForm() {
             <Form>
               <div className="mb-3">
                 <label htmlFor="nombre" className="form-label">Nombre</label>
-                <Field 
-                  name="nombre" 
-                  type="text" 
-                  className="form-control" 
-                  id="nombre" 
+                <Field
+                  name="nombre"
+                  type="text"
+                  className="form-control"
+                  id="nombre"
                 />
                 <ErrorMessage name="nombre" component="div" className="text-danger" />
               </div>
 
               <div className="mb-3">
                 <label htmlFor="precio" className="form-label">Precio</label>
-                <Field 
-                  name="precio" 
-                  type="number" 
-                  step="0.01" 
-                  className="form-control" 
-                  id="precio" 
+                <Field
+                  name="precio"
+                  type="number"
+                  step="0.01"
+                  className="form-control"
+                  id="precio"
                 />
                 <ErrorMessage name="precio" component="div" className="text-danger" />
               </div>
 
               <div className="mb-3">
                 <label htmlFor="categoria" className="form-label">Categoría</label>
-                <Field 
-                  as="select" 
-                  name="categoria" 
-                  className="form-select" 
+                <Field
+                  as="select"
+                  name="categoria"
+                  className="form-select"
                   id="categoria"
                 >
                   <option value="">Seleccionar categoría</option>
@@ -126,16 +127,16 @@ function ProductoForm() {
               </div>
 
               <div className="d-flex gap-2">
-                <button 
-                  type="submit" 
-                  className="btn btn-primary" 
+                <button
+                  type="submit"
+                  className="btn btn-primary"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Guardando...' : 'Guardar'}
                 </button>
-                <button 
-                  type="button" 
-                  className="btn btn-secondary" 
+                <button
+                  type="button"
+                  className="btn btn-secondary"
                   onClick={() => navigate('/productos')}
                 >
                   Cancelar

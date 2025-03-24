@@ -1,3 +1,4 @@
+#backend/views.py
 from rest_framework import viewsets
 from .models import Categoria, Producto
 from .serializers import CategoriaSerializer, ProductoSerializer
